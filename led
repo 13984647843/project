@@ -17,31 +17,6 @@ uchar code s[]={0x7E,0xBD,0xDB,0xE7};
 uchar code sa[]={0x7F,0xBF,0xDF,0xEF,0xF7,0xFB,0xFD,0xFE};
 uchar code as[]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F};
 
-/*void Timer() //初始化定时器
-{
-	TMOD=0x01;
-	TH0=0;
-	TL0=0;    //定时器的计数起点为0
-	TR0=1;	 //启动定时器0
-}
-
-
-void TimerOverflow() //处理定时器0的溢出事件
-{
-	static char c;
-	if(TF0 == 1)   //检测定时器0是否溢出，每到65535次
-	{
-		TF0 = 0;
-		c++;
-		if(c == 14)
-		{
-			c = 0;
-			beep=~beep; 
-		}
-	}
-}	 */
-
-
 void delay(unsigned int i)
 {
     unsigned int m, n;

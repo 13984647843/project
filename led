@@ -1,0 +1,316 @@
+#include<reg52.h>
+#include<intrins.h>
+
+#define uchar unsigned char
+
+uchar num = 0;          
+
+sbit led = P0 ^ 0;      //LED灯
+sbit s1 = P2 ^ 0; 		//切换模式按键
+sbit s2 = P2 ^ 1;      //切换速度按键
+sbit beep = P2 ^ 5;     //蜂鸣器
+uchar i=0;
+uchar b=0;
+uchar id=0;
+uchar code a[]={0xE7,0xDB,0xBD,0x7E};
+uchar code s[]={0x7E,0xBD,0xDB,0xE7};
+uchar code sa[]={0x7F,0xBF,0xDF,0xEF,0xF7,0xFB,0xFD,0xFE};
+uchar code as[]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F};
+
+/*void Timer() //初始化定时器
+{
+	TMOD=0x01;
+	TH0=0;
+	TL0=0;    //定时器的计数起点为0
+	TR0=1;	 //启动定时器0
+}
+
+
+void TimerOverflow() //处理定时器0的溢出事件
+{
+	static char c;
+	if(TF0 == 1)   //检测定时器0是否溢出，每到65535次
+	{
+		TF0 = 0;
+		c++;
+		if(c == 14)
+		{
+			c = 0;
+			beep=~beep; 
+		}
+	}
+}	 */
+
+
+void delay(unsigned int i)
+{
+    unsigned int m, n;
+    for (m = i; m>0; m--)
+    for (n = 125; n>0; n--);
+}
+
+void Delay30ms()		//@12.000MHz
+{
+	unsigned char i, j;
+
+	i = 59;
+	j = 90;
+	do
+	{
+		while (--j);
+	} while (--i);
+}
+
+
+int main()
+{
+	int number=100;
+//	Timer();
+    while (1)
+	{
+
+	
+        if (s1  == 0)
+		{
+            Delay30ms();          //消除抖动
+            if (s1 == 0)
+			{
+                while (!s1);    //等待按键松开
+                num++;
+				if(num==5)
+				num=1;
+            }
+		}  
+		if (s2  == 0)
+		{
+            Delay30ms();          //消除抖动
+            if (s2 == 0)
+			{
+                while (!s2);    //等待按键松开
+                number=number+300;
+				if(number==2200)
+				number=100;
+            }
+		}
+
+
+            if (num==1)
+			{
+	            P0=a[i];              
+                delay(number);      
+                i++;                 
+                if(i==4)              
+                {
+                  i=0;  
+				  id++;          
+                }
+				//	TimerOverflow();
+			 }
+   
+			else if (num==2)
+			{
+	            P0=s[i];              
+                delay(number);      
+                i++;                 
+                if(i==4)              
+                {
+                  i=0;    
+				  id++;        
+                }
+				//	TimerOverflow();
+			 }	 
+
+			else if (num==3)
+			{
+	            P0=sa[i];              
+                delay(number);      
+                i++;    
+				if(i==4)id++;              
+                if(i==8)              
+                {
+                  i=0;   
+				  id++;         
+                }
+			 }	 
+
+			 else if (num==4)
+			{
+	            P0=as[i];              
+                delay(number);      
+                i++;  
+				if(i==4)id++;               
+                if(i==8)              
+                {
+                  i=0;   
+				  id++;         #include<reg52.h>
+#include<intrins.h>
+
+#define uchar unsigned char
+
+uchar num = 0;          
+
+sbit led = P0 ^ 0;      //LED灯
+sbit s1 = P2 ^ 0; 		//切换模式按键
+sbit s2 = P2 ^ 1;      //切换速度按键
+sbit beep = P2 ^ 5;     //蜂鸣器
+uchar i=0;
+uchar b=0;
+uchar id=0;
+uchar code a[]={0xE7,0xDB,0xBD,0x7E};
+uchar code s[]={0x7E,0xBD,0xDB,0xE7};
+uchar code sa[]={0x7F,0xBF,0xDF,0xEF,0xF7,0xFB,0xFD,0xFE};
+uchar code as[]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F};
+
+/*void Timer() //初始化定时器
+{
+	TMOD=0x01;
+	TH0=0;
+	TL0=0;    //定时器的计数起点为0
+	TR0=1;	 //启动定时器0
+}
+
+
+void TimerOverflow() //处理定时器0的溢出事件
+{
+	static char c;
+	if(TF0 == 1)   //检测定时器0是否溢出，每到65535次
+	{
+		TF0 = 0;
+		c++;
+		if(c == 14)
+		{
+			c = 0;
+			beep=~beep; 
+		}
+	}
+}	 */
+
+
+void delay(unsigned int i)
+{
+    unsigned int m, n;
+    for (m = i; m>0; m--)
+    for (n = 125; n>0; n--);
+}
+
+void Delay30ms()		//@12.000MHz
+{
+	unsigned char i, j;
+
+	i = 59;
+	j = 90;
+	do
+	{
+		while (--j);
+	} while (--i);
+}
+
+
+int main()
+{
+	int number=100;
+//	Timer();
+    while (1)
+	{
+
+	
+        if (s1  == 0)
+		{
+            Delay30ms();          //消除抖动
+            if (s1 == 0)
+			{
+                while (!s1);    //等待按键松开
+                num++;
+				if(num==5)
+				num=1;
+            }
+		}  
+		if (s2  == 0)
+		{
+            Delay30ms();          //消除抖动
+            if (s2 == 0)
+			{
+                while (!s2);    //等待按键松开
+                number=number+300;
+				if(number==2200)
+				number=100;
+            }
+		}
+
+
+            if (num==1)
+			{
+	            P0=a[i];              
+                delay(number);      
+                i++;                 
+                if(i==4)              
+                {
+                  i=0;  
+				  id++;          
+                }
+				//	TimerOverflow();
+			 }
+   
+			else if (num==2)
+			{
+	            P0=s[i];              
+                delay(number);      
+                i++;                 
+                if(i==4)              
+                {
+                  i=0;    
+				  id++;        
+                }
+				//	TimerOverflow();
+			 }	 
+
+			else if (num==3)
+			{
+	            P0=sa[i];              
+                delay(number);      
+                i++;    
+				if(i==4)id++;              
+                if(i==8)              
+                {
+                  i=0;   
+				  id++;         
+                }
+			 }	 
+
+			 else if (num==4)
+			{
+	            P0=as[i];              
+                delay(number);      
+                i++;  
+				if(i==4)id++;               
+                if(i==8)              
+                {
+                  i=0;   
+				  id++;         
+                }
+			 }	
+			 if(id==4)
+			 {
+			  id=0;
+			  beep=~beep;
+			  delay(200);
+			  beep=~beep;
+			 } 	  
+  
+    }
+	
+}
+
+                }
+			 }	
+			 if(id==4)
+			 {
+			  id=0;
+			  beep=~beep;
+			  delay(200);
+			  beep=~beep;
+			 } 	  
+  
+    }
+	
+}

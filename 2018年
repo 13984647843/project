@@ -102,7 +102,7 @@ void LED_RightToLeft(u8 Pinx)
     LED_Off(GPIO_P0, LED[Pinx]);    
   }
 }
-void BEEP_Tweet()
+void BEEP_Tweet()     //翻转蜂鸣器引脚
 {
    GPIO_TogglePin(GPIO_P2,BEEP_Pin);
 

@@ -2,5 +2,5 @@ $ git init
 $ touch README.md
 $ git add README.md
 $ git commit -m 'first_commit'
-$ git remote add origin https://github.com/jerryhanjj/baike_spider.git
+$ git remote add origin https://github.com/13984647843/project.git
 $ git push origin master
